@@ -1,4 +1,41 @@
-.menu {
-  background: #fff;
-  padding: 5px;
+@font-face {
+  font-family: Lora;
+  src: url('../drawable/Lora//LoraRegular/LoraRegular.woff');
 }
+
+html {
+  font-size: 15px;
+  font-family: Lora;
+}
+
+.menu {
+  background: #ececec;
+  padding: 5px;
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menu-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  list-style-type: none;
+}
+
+.menu-bar a {
+  color: black;
+  cursor: default;
+  text-decoration: none;
+  padding: 15px 5px;
+}
+
+.menu-bar li a:hover {
+    background-color: #111;
+    color: #fff;
+
+}
+
+
