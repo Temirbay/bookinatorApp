@@ -1,0 +1,11 @@
+.select-genre {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid;
+}
+
+.select-genre button{
+  margin: 0 10px 20px 0;
+  height: 50px;
+  background-color: transparent;
+}

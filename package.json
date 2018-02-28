@@ -7,7 +7,10 @@
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
-    "react-scripts": "0.9.5"
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "0.9.5",
+    "react-star-ratings": "^2.2.0",
+    "reactstrap": "^5.0.0-beta.2"
   },
   "devDependencies": {},
   "scripts": {

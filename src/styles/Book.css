@@ -1,0 +1,39 @@
+.book-button-add {
+  background-color: green;
+  width: 100px;
+  height: 25px;
+  color: white;
+  font-size: 13px;
+  border: solid 2px #1E824C;
+  border-radius: 5px;
+}
+
+.book-button-delete {
+  background-color: red;
+  width: 100px;
+  height: 25px;
+  color: white;
+  font-size: 13px;
+  border: solid 2px #F22613;
+  border-radius: 5px;
+}
+
+.book {
+  display: flex;
+  margin: 20px;
+  padding: 5px;
+  border-bottom: solid 1px;
+}
+
+.book-container {
+  padding: 5px;
+  margin: 5px;
+  text-align: left;
+}
+
+.book-img {
+  border: solid 2px;
+  text-align: center;
+  width: 150px;
+  height: 200px;
+}

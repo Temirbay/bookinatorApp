@@ -13,16 +13,42 @@ class Body extends React.Component {
 
   constructor(props) {
     super (props);
+
+    this.state = {
+
+    }
+  }
+
+
+
+  handleCartItemAdded = (cart) => {
+    this.props.onCartItemAdded(cart);
+  }
+
+  handleCartItemDeleted = (id) => {
+    this.props.onCartItemDeleted(id);
   }
 
   render() {
+
       return(
         <div className="body">
           <Switch>
-            <Route exact path='/' component={Home}/>
-            <Route path='/catalog' component={Catalog}/>
-            <Route path='/mybooks' component={Mybooks}/>
-            <Route path='/discussions' component={Discussions}/>
+            <Route exact path='/' render={props => <Home
+                feeds={this.props.feeds}/>}/>
+
+            <Route path='/catalog' render={props => <Catalog
+                onCartItemAdded={this.handleCartItemAdded}
+                onCartItemDeleted={this.handleCartItemDeleted}
+                books={this.props.books}
+                carts={this.props.carts}/>}
+                />
+
+            <Route path='/mybooks' render={props => <Mybooks
+                onCartItemDeleted={this.handleCartItemDeleted}
+                carts={this.props.carts}/>}/>
+
+            <Route path='/discussions' render={props => <Discussions/>}/>
           </Switch>
         </div>
       );

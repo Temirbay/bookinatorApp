@@ -1,0 +1,7 @@
+.catalog {
+  display: flex;
+}
+
+.catalog-side-bar {
+  width: 20%;
+}

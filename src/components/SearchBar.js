@@ -10,15 +10,18 @@ class SearchBar extends React.Component {
       inputText: '',
     }
 
-    this.handleInputChange = this.handleInputChange.bind (this);
   }
 
-  handleInputChange (e) {
+  handleInputChange = (e) => {
     this.setState({inputText: e.target.value});
   }
 
-  handleIconClick () {
-      console.log ("Clicked");
+  handleIconClick = () => {
+    this.props.onBookSearched(this.state.inputText);
+  }
+
+  handleKeyPress = (event)=> {
+    this.handleIconClick();
   }
 
   render() {
@@ -38,7 +41,8 @@ class SearchBar extends React.Component {
             type="text"
             value={this.state.inputText}
             onChange={this.handleInputChange}
-            placeholder="Enter name of the book"/>
+            placeholder="Enter name or author"
+            onKeyPress={this.handleKeyPress}/>
         </div>
 
       </div>

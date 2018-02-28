@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 
 
-import { BrowserRouter as Hashrouter, Navlink, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Hashrouter} from 'react-router-dom'
 
 
 ReactDOM.render(

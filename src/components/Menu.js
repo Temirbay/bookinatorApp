@@ -19,10 +19,10 @@ class Menu extends React.Component {
     return (
       <div className="menu">
        <ul className="menu-bar">
-        <li><Link className="menu-bar-element" to='/'>  <a href="">Home</a> </Link></li>
-        <li><Link className="menu-bar-element" to='/catalog'> <a href="">Catalog</a> </Link></li>
-        <li><Link className="menu-bar-element" to='/mybooks'> <a href="">My Books</a> </Link></li>
-        <li><Link className="menu-bar-element" to='/discussions'> <a href="">Discussions</a> </Link></li>
+        <li><a className="menu-bar-element" href="/">Home</a></li>
+        <li><a className="menu-bar-element" href='/catalog'>Catalog</a></li>
+        <li><a className="menu-bar-element" href='/mybooks'>My Books</a></li>
+        <li><a className="menu-bar-element" href="'/discussions'">Discussions</a></li>
       </ul>
       </div>
     );

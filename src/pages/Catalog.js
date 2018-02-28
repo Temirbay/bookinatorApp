@@ -1,20 +1,80 @@
 import React, {Component} from 'react'
 
-import FullCatalog from './FullCatalog.js'
-import Book from './Book.js'
+import Book from '../components/Book.js'
+import SelectGenre from '../components/SelectGenre.js'
+import SearchBar from '../components/SearchBar.js'
 
-
-import { BrowserRouter as Hashrouter, Navlink, Route, Switch } from 'react-router-dom'
+import '../styles/Catalog.css'
 
 class Catalog extends React.Component {
 
+  constructor(props) {
+    super (props);
+
+    this.state = {
+      books: [],
+    }
+
+    this.state.books = this.props.books;
+  }
+
+  handleCartItemAdded = (cart) => {
+    this.props.onCartItemAdded(cart);
+  }
+
+  handleCartItemDeleted = (id) => {
+    this.props.onCartItemDeleted(id);
+  }
+
+  handleGenreItemSelected = (type) => {
+    console.log (type);
+    if (type == "all") {
+      this.setState({books: this.props.books});
+    }
+    else {
+      let items = this.props.books.filter (item => {
+        return item.genre == type
+      })
+      this.setState({books: items});
+    }
+  }
+
+  handleBookSearched = (text) => {
+    let newArray = this.props.books.filter ( item => {
+      return item.name.toLowerCase().indexOf(text.toLowerCase()) >= 0 ||
+             item.author.toLowerCase().indexOf(text.toLowerCase()) >= 0
+    })
+
+    this.setState ({
+      books: newArray
+    })
+  }
+
   render() {
+    const booksAPI = this.state.books.map((book, index) => {
+      return(
+          <div key={index}>
+            <Book book={book} type="book" onCartItemAdded={this.handleCartItemAdded}/>
+          </div>
+        );
+    });
+
+    const cartsAPI = this.props.carts.map((book, index) => {
+      return(
+          <div key={index}>
+            <Book book={book} type="cart" onCartItemDeleted={this.handleCartItemDeleted}/>
+          </div>
+        );
+    });
+
     return (
       <div className="catalog">
-        <Switch>
-          <Route exact path='/catalog' component={FullCatalog}/>
-          <Route path='/catalog/:id' component={Book}/>
-        </Switch>
+        <div className="catalog-side-bar">
+          <SearchBar onBookSearched={this.handleBookSearched}/>
+          <SelectGenre onGenreItemSelected={this.handleGenreItemSelected}/>
+        </div>
+        <ul className="catalog-list"> {booksAPI} </ul>
+        <ul className="catalog-list"> {cartsAPI} </ul>
       </div>
     );
   }
