@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Lora;
+  src: url('../drawable/Lora//LoraRegular/LoraRegular.woff');
+}
+
+html {
+  font-size: 15px;
+  font-family: Lora;
+}
+
 .body {
   padding: 20px;
   margin: 0 auto;

@@ -8,6 +8,8 @@ import Discussions from '../pages/Discussions.js'
 
 import '../styles/Menu.css'
 
+import { NavLink } from 'react-router-dom'
+
 class Menu extends React.Component {
 
   constructor(props) {
@@ -19,10 +21,10 @@ class Menu extends React.Component {
     return (
       <div className="menu">
        <ul className="menu-bar">
-        <li><a className="menu-bar-element" href="/">Home</a></li>
-        <li><a className="menu-bar-element" href='/catalog'>Catalog</a></li>
-        <li><a className="menu-bar-element" href='/mybooks'>My Books</a></li>
-        <li><a className="menu-bar-element" href="'/discussions'">Discussions</a></li>
+        <li><NavLink className="menu-bar-element" to={'/'}>Home</NavLink></li>
+        <li><NavLink className="menu-bar-element" to={'/catalog'}>Catalog</NavLink></li>
+        <li><NavLink className="menu-bar-element" to={'/mybooks'}>My Books</NavLink></li>
+        <li><NavLink className="menu-bar-element" to={'/discussions'}>Discussions</NavLink></li>
       </ul>
       </div>
     );

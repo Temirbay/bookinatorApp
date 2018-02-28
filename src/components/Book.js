@@ -6,7 +6,7 @@ class Book extends React.Component {
 
   constructor(props) {
     super(props);
-
+    console.log (this.props.book.img);
   }
 
   handleClick = () => {
@@ -17,6 +17,7 @@ class Book extends React.Component {
   }
 
   render() {
+
     if (this.props.type == "cart") {
         return(
           <div className="book">

@@ -59,14 +59,6 @@ class Catalog extends React.Component {
         );
     });
 
-    const cartsAPI = this.props.carts.map((book, index) => {
-      return(
-          <div key={index}>
-            <Book book={book} type="cart" onCartItemDeleted={this.handleCartItemDeleted}/>
-          </div>
-        );
-    });
-
     return (
       <div className="catalog">
         <div className="catalog-side-bar">
@@ -74,7 +66,6 @@ class Catalog extends React.Component {
           <SelectGenre onGenreItemSelected={this.handleGenreItemSelected}/>
         </div>
         <ul className="catalog-list"> {booksAPI} </ul>
-        <ul className="catalog-list"> {cartsAPI} </ul>
       </div>
     );
   }

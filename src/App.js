@@ -3,6 +3,11 @@ import './App.css';
 
 import Header from './components/Header.js'
 import Body from './components/Body.js'
+import SignIn from './pages/SignIn.js'
+
+import { BrowserRouter as Hashrouter, Navlink, Route, Switch } from 'react-router-dom'
+
+
 
 class App extends React.Component {
 
@@ -15,28 +20,39 @@ class App extends React.Component {
               name: "Harry Potter",
               author: 'J.K Rowling',
               genre: 'fantasy',
-              img: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjc36KGxMbZAhUK3SwKHZRjA6sQjRx6BAgAEAY&url=https%3A%2F%2Fwww.amazon.com%2FHarry-Potter-Chamber-Secrets-Rowling%2Fdp%2F0439064872&psig=AOvVaw1mBqDaHQqThvpXc-h7DCe1&ust=1519835889384771'},
+              img: '../drawable/harrypotter.jpeg'},
             {
               id: 2,
               name: "Sherlock Holmes",
               author: 'A.K. Doyle',
               genre: 'detective',
-              img: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiDqrWuxMbZAhXE_iwKHQs8C8gQjRx6BAgAEAY&url=https%3A%2F%2Fwww.amazon.com%2FOriginal-Illustrated-Sherlock-Holmes%2Fdp%2F0890090572&psig=AOvVaw3-KjT450WC-kv4KD7sMmf-&ust=1519835973528763' },
+              img: '../drawable/sherlock.jpg' },
             {
               id: 3,
               name: "Abay",
               author: 'Mukhtar Auezov',
               genre: 'detective',
-              img: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj52cvMxMbZAhXCDiwKHWvYDO4QjRx6BAgAEAY&url=https%3A%2F%2Fwww.livelib.ru%2Fbook%2F1000558524-put-abaya-romanepopeya-v-dvuh-tomah-tom-1-muhtar-auezov&psig=AOvVaw2tpSHVcK6AARr4Nj1SQbDL&ust=1519836027811853'},
+              img: '../drawable/abay.jpg'},
         ],
 
-      username: '',
-      password: '',
+      username: 'Miras',
+      password: 'password',
 
-      carts: [],
+      carts: [
+            { id: 1,
+              name: "Harry Potter",
+              author: 'J.K Rowling',
+              genre: 'fantasy',
+              img: '../drawable/harrypotter.jpeg'},],
       feeds: [],
       nextID: 2,
     }
+
+    this.state.username = this.props.username;
+    this.state.password = this.props.password;
+
+    console.log (this.state.username);
+    console.log (this.state.password);
   }
 
   handleCartItemAdded = (cart) => {
@@ -66,6 +82,14 @@ class App extends React.Component {
   }
 
   render() {
+
+    if (!this.state.username || !this.state.password) {
+      return (
+        <div>
+          <SignIn/>
+        </div>
+      );
+    }
     return (
       <div className="App">
         <div> <Header/> </div>

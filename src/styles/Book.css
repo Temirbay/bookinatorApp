@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Lora;
+  src: url('../drawable/Lora//LoraRegular/LoraRegular.woff');
+}
+
+html {
+  font-size: 15px;
+  font-family: Lora;
+}
+
 .book-button-add {
   background-color: green;
   width: 100px;
@@ -22,6 +32,7 @@
   display: flex;
   margin: 20px;
   padding: 5px;
+  width: 300px;
   border-bottom: solid 1px;
 }
 

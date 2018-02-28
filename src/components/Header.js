@@ -17,6 +17,7 @@ class Header extends React.Component {
         <div className="menu">  <Menu/> </div>
         <div className="search-bar">  <SearchBar/> </div>
         <div className="status-bar">  <StatusBar/> </div>
+        <a href="/signin">Log out</a>
       </div>
     );
   }
