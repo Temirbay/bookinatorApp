@@ -1,0 +1,53 @@
+* {
+    font-size: 15px;
+}
+
+.discussions{
+    width: 75%;
+    align-self: center;
+}
+
+.question-list{
+    text-align: left;
+    font-style: normal;
+    font-size: 12px;
+}
+
+.question-detail-container{
+    float: right;
+    width: 500px;
+    position: absolute;
+    top: 175px;
+    left: 700px;
+}
+
+.question-container{
+    cursor:pointer;
+    float: left;
+    width: 500px;
+    text-decoration:none;
+}
+.question-container:hover{
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+.list-of-question:link {
+    text-decoration: none;
+    color: black;
+}
+
+.list-of-question:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.list-of-question:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+.list-of-question:active {
+    text-decoration: underline;
+    color: black;
+}

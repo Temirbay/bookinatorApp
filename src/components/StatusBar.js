@@ -11,7 +11,7 @@ class StatusBar extends React.Component {
     super(props);
     this.state = {
       visibility: 'false',
-    } 
+    }
   }
 
   handleClick = () => {
@@ -29,17 +29,20 @@ class StatusBar extends React.Component {
     }
   }
 
+  handleClose = () => {
+    this.setState({visibility: 'false'});
+  }
   render() {
     return (
-      <div className="status-bar" onClick={this.handleClick}  >
-        <img className="user" src={user} alt={"user"}/>
-        <div className="navigation-menu-component">
-          <NavigationMenu isOpen={this.state.visibility}/>
-        </div>
+      <div className="status-bar">
+        <img className="status-bar-img" src={user} alt={"user"}  onClick={this.handleClick}/>
+        <NavigationMenu
+          isOpen={this.state.visibility}
+          username={this.props.username}
+          onClose={this.handleClose}/>
       </div>
     );
   }
-
 }
 
 export default StatusBar;

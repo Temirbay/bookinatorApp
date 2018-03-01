@@ -1,0 +1,22 @@
+.question{
+    border-left: 1px solid;
+
+}
+
+.question-detail{
+    text-align: center
+}
+
+.comment-list{
+    font-size: 20px;
+    margin-right: 50px;
+}
+
+.comment-by-user-name{
+    font-size: 15px;
+}
+
+.comment {
+    margin-bottom: 20px;
+    border-bottom: 1px solid;
+}

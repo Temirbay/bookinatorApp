@@ -1,38 +1,53 @@
+@font-face {
+  font-family: Lora;
+  src: url('../drawable/Lora//LoraRegular/LoraRegular.woff');
+}
+
+html {
+  font-size: 15px;
+  font-family: Lora;
+    text-decoration: none;
+  color: black;
+}
+
 .navigation-menu{
     position: absolute;
+    z-index: 5;
+    top: 140px;
+    left: 985px;
     width: 300px;
     text-align: left;
     background: white;
-    border-style: solid;
+    border: 2px solid;
   }
-    
+
   .navigation-menu-list{
     list-style-type: none;
     line-height: 190%;
   }
-  
+
   .link-navigation-menu:link {
     text-decoration: none;
     color: black;
   }
-  
+
   .link-navigation-menu:visited {
     text-decoration: none;
     color: black;
   }
-  
+
   .link-navigation-menu:hover {
     text-decoration: underline;
     color: black;
   }
-  
+
   .link-navigation-menu:active {
     text-decoration: underline;
     color: black;
   }
-  
+
   .user-name{
     text-transform: uppercase;
     font-weight: bold;
   }
-  
+

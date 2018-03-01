@@ -6,6 +6,8 @@ import SearchBar from '../components/SearchBar.js'
 
 import '../styles/Catalog.css'
 
+import {Pagination} from 'semantic-ui-react'
+
 class Catalog extends React.Component {
 
   constructor(props) {
@@ -61,11 +63,15 @@ class Catalog extends React.Component {
 
     return (
       <div className="catalog">
-        <div className="catalog-side-bar">
-          <SearchBar onBookSearched={this.handleBookSearched}/>
-          <SelectGenre onGenreItemSelected={this.handleGenreItemSelected}/>
+        <div className="catalog-container">
+          <div className="catalog-side-bar">
+            <SearchBar onBookSearched={this.handleBookSearched}/>
+            <SelectGenre onGenreItemSelected={this.handleGenreItemSelected}/>
+          </div>
+
+          <ul className="catalog-list"> {booksAPI} </ul>
         </div>
-        <ul className="catalog-list"> {booksAPI} </ul>
+
       </div>
     );
   }

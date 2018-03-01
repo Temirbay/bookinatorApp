@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 
 import '../styles/SelectGenre.css'
 
+import {Button} from 'semantic-ui-react'
+
 class SelectGenre extends React.Component {
 
   constructor (props) {
@@ -25,9 +27,13 @@ class SelectGenre extends React.Component {
     return (
       <div className="select-genre">
         <h4>Select Genre</h4>
-        <button onClick={this.handleClickAll}> All </button>
-        <button onClick={this.handleClickFantasy}> Fantasy</button>
-        <button onClick={this.handleClickDetective}> Detective</button>
+        <Button.Group vertical>
+          <Button onClick={this.handleClickAll}> All </Button>
+          <Button onClick={this.handleClickFantasy}> Fantasy</Button>
+          <Button onClick={this.handleClickDetective}> Detective</Button>
+        </Button.Group>
+
+
       </div>
     );
   }

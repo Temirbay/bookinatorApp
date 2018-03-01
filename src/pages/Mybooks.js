@@ -8,24 +8,14 @@ class Mybooks extends React.Component {
 
   constructor(props) {
     super (props);
-
-    this.state = {
-      carts: []
-    }
-  }
-
-  componentWillMount () {
-    let items = this.props.carts;
-    this.setState({ carts: items});
   }
 
   handleCartItemDeleted = (id) => {
     this.props.onCartItemDeleted(id);
   }
 
-
   render() {
-    const cartsAPI = this.state.carts.map((book, index) => {
+    const cartsAPI = this.props.carts.map((book, index) => {
       return(
           <div key={index}>
             <Book book={book} type="cart" onCartItemDeleted={this.handleCartItemDeleted}/>

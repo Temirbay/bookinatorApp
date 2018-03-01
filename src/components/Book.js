@@ -1,19 +1,33 @@
 import React, {Component} from 'react'
 
+import {Button, Image, Rating} from 'semantic-ui-react'
+
+
 import '../styles/Book.css'
+
+import {Modal, Icon} from 'semantic-ui-react'
 
 class Book extends React.Component {
 
   constructor(props) {
     super(props);
     console.log (this.props.book.img);
+
+    this.state = { modalOpen: false }
   }
+
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
+
 
   handleClick = () => {
     if (this.props.type == "book")
       this.props.onCartItemAdded (this.props.book);
     else
       this.props.onCartItemDeleted(this.props.book.id);
+
+    this.setState({modalOpen: true});
   }
 
   render() {
@@ -26,7 +40,9 @@ class Book extends React.Component {
                 <h4>{this.props.book.name}</h4>
                 <h5>By {this.props.book.author}</h5>
                 <h5>{this.props.book.genre}</h5>
-                <button className="book-button-delete" onClick={this.handleClick}> Delete</button>
+                <Rating icon='star' defaultRating={3} maxRating={4} />
+
+                <Button negative onClick={this.handleClick}> Delete</Button>
               </div>
           </div>
         );
@@ -40,7 +56,24 @@ class Book extends React.Component {
                 <h4>{this.props.book.name}</h4>
                 <h5>By {this.props.book.author}</h5>
                 <h5>{this.props.book.genre}</h5>
-                <button className="book-button-add" onClick={this.handleClick}> Want to Read</button>
+                <Rating icon='star' defaultRating={3} maxRating={4} />
+                <Button positive onClick={this.handleClick}> Want to Read</Button>
+                <Modal
+                  open={this.state.modalOpen}
+                  onClose={this.handleClose}
+                  basic
+                  size='small'
+                  className="modal"
+                >
+                <Modal.Content>
+                  <h3>Added to your book list</h3>
+                </Modal.Content>
+                <Modal.Actions>
+                  <Button color='green' onClick={this.handleClose} inverted>
+                    <Icon name='checkmark' /> Got it
+                  </Button>
+                </Modal.Actions>
+              </Modal>
               </div>
           </div>
         );

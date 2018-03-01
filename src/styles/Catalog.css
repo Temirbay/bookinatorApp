@@ -10,8 +10,15 @@ html {
 
 .catalog {
   display: flex;
+  flex-direction: column;
+}
+
+.catalog-container {
+  display: flex;
+  flex-direction: row;
 }
 
 .catalog-side-bar {
   width: 20%;
 }
+

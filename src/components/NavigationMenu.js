@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import '../styles/NavigationMenu.css'
 
+import { BrowserRouter as Hashrouter, NavLink, Route, Switch } from 'react-router-dom'
 
 class NavigationMenu extends React.Component{
     constructor(props){
@@ -11,7 +12,10 @@ class NavigationMenu extends React.Component{
             isOpen: '',
         }
         this.state.isOpen = this.props.isOpen;
+    }
 
+    handleClick = () => {
+        this.props.onClose ();
     }
 
     render(){
@@ -19,10 +23,14 @@ class NavigationMenu extends React.Component{
             return(
                 <div className = "navigation-menu">
                     <ul className="navigation-menu-list" >
-                        <li className="user-name">Changes</li>
-                        <li className="reading-challenge" ><a class="link-navigation-menu" href="">Reading Challenge</a></li>
-                        <li className="settings" ><a class="link-navigation-menu" href="">Settings</a></li>
-                        <li className="sign-out" ><a class="link-navigation-menu" href="">Sign Out</a></li>
+                        <li> <h3> {this.props.username}</h3> </li>
+
+                        <li><NavLink to={'/profile'}
+                            onClick={this.handleClick}> Profile</NavLink></li>
+                        <li><NavLink to={'/addbook'}
+                            onClick={this.handleClick}> Add book</NavLink></li>
+                        <li><NavLink to={'/signin'}
+                            onClick={this.handleClick}> Sign Out</NavLink></li>
                     </ul>
                 </div>
             );

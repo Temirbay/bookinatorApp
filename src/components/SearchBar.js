@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import {Input} from 'semantic-ui-react'
+
 import '../styles/SearchBar.css'
 
 class SearchBar extends React.Component {

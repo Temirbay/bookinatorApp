@@ -1,4 +1,14 @@
-  .user {
-    width: 10px;
-    height: 10px;
-  } 
+@font-face {
+  font-family: Lora;
+  src: url('../drawable/Lora//LoraRegular/LoraRegular.woff');
+}
+
+html {
+  font-size: 15px;
+  font-family: Lora;
+}
+
+.status-bar img {
+  width: 50px;
+  height: 50px;
+}

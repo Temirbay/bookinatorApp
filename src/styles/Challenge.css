@@ -1,0 +1,26 @@
+.challenge{
+  height: 250px;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  margin-top: 20px;
+}
+
+.challenge-image{
+  width: 250px;
+  height: 100px;
+}
+
+.challenge-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.challenge-form {
+  margin-left: 10px;
+}
+
+.challenge-input {
+  width: 100px;
+}

@@ -10,14 +10,16 @@ import logo from '../drawable/logo.jpg'
 
 class Header extends React.Component {
 
+  constructor (props) {
+    super (props);
+  }
+
   render() {
     return (
       <div className="header">
         <img className="logo" src={logo} alt={"logo"}/>
         <div className="menu">  <Menu/> </div>
-        <div className="search-bar">  <SearchBar/> </div>
-        <div className="status-bar">  <StatusBar/> </div>
-        <a href="/signin">Log out</a>
+        <div className="status-bar">  <StatusBar username={this.props.username}/> </div>
       </div>
     );
   }

@@ -3,8 +3,7 @@
   src: url('../drawable/Lora//LoraRegular/LoraRegular.woff');
 }
 
-html {
-  font-size: 15px;
+*{
   font-family: Lora;
 }
 
@@ -25,12 +24,15 @@ html {
   list-style-type: none;
 }
 
-.menu-bar a {
+.menu-bar-element{
   color: black;
   cursor: default;
   text-decoration: none;
+  outline: none;
   padding: 15px 5px;
 }
+
+
 
 .menu-bar li a:hover {
     background-color: #111;
