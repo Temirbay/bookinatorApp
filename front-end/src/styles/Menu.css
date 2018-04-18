@@ -34,6 +34,17 @@
 
 
 
+
+.menu-bar-element-active{
+  color: #fff;
+  cursor: default;
+  background-color: #111;
+  text-decoration: none;
+  outline: none;
+  padding: 15px 5px;
+}
+
+
 .menu-bar li a:hover {
     background-color: #111;
     color: #fff;
