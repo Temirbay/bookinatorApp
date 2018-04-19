@@ -4,6 +4,8 @@ import App from '../App.js'
 
 
 import '../styles/SignIn.css'
+import SignUp from './SignUp.js';
+import Button from 'semantic-ui-react';
 
 class SignIn extends React.Component {
 
@@ -12,6 +14,7 @@ class SignIn extends React.Component {
 
     this.state = {
       signed: false,
+      notregistered: false,
       username: '',
       password: '',
     }
@@ -28,6 +31,13 @@ class SignIn extends React.Component {
 
   handleSign = () => {
       this.setState ({signed: true});
+  }
+
+  handleSignUpClicked = () => {
+    this.setState({
+      notregistered: true,      
+      signed: true,
+    }); 
   }
 
   render() {
@@ -61,6 +71,11 @@ class SignIn extends React.Component {
                   required/>
               </div>
 
+              <div
+                onClick={this.handleSignUpClicked}>
+                    <p> Haven't got an account? </p>  
+              </div> 
+
               <button
                 className="signin-button"
                 type="submit">Sign In</button>
@@ -69,6 +84,14 @@ class SignIn extends React.Component {
         </div>
       );
     }
+    else if (this.state.notregistered == true){
+      return (
+        <div className="signin">
+          <SignUp/>
+        </div>
+      );
+    }
+
     else {
       return (
         <div className="signin">
@@ -76,7 +99,6 @@ class SignIn extends React.Component {
         </div>
       );
     }
-
   }
 
 }

@@ -4,6 +4,8 @@ import '../styles/Discussions.css'
 
 import Question from '../components/Question.js'
 
+import client from '../client'
+
 import { NavLink } from 'react-router-dom'
 
 class Discussions extends React.Component {
@@ -12,52 +14,34 @@ class Discussions extends React.Component {
     super (props);
 
     this.state = {
-      questions:[
-        {
-          id: 1,
-          question:'Harry Potter Short Description',
-          visibility:'false',
-          comments:[{
-            id: 1,
-            author: 'Ginny Weasley',
-            text: 'Boys running through the wall'
-          },
-          {
-            id: 2,
-            author: 'Harry Potter',
-            text: 'Flying on bloom'
-          }
-          ]
-        },
-        {
-          id: 2,
-          question:'Where to find book',
-          visibility:'false',
-          comments:[{
-            id: 1,
-            author: 'Anonymous',
-            text: 'I have this book'
-          },
-          {
-            id: 2,
-            author: 'Harry Potter',
-            text: 'Here the address ...'
-          }
-          ]
-        },
-        {
-          id: 3,
-          question:'Who want to exchange to ... book',
-          visibility:'false',
-          comments:[{
-            id: 1,
-            author: 'Some guy',
-            text: 'I can give you ...'
-          }
-          ]
-        }
-      ]
+      questions: []
     }
+  }
+
+  componentDidMount() {
+    client.getTopics((topics) => {
+      
+      let temp = this.state.questions;
+      topics.map((topic) => {
+          temp.push({
+            id: topic.id, 
+            question: topic.text, 
+            visibility: false, 
+            comments: []});
+      })
+    
+      this.setState({questions: temp});
+  
+      topics.map((topic) => {
+        client.getComments(topic.id, (data) => {
+          let temp2 = this.state.questions;
+          temp2[topic.id-1].comments = data
+          
+          this.setState({questions: temp2});
+        })
+      })
+    });
+
   }
 
   handleClick = (id) => {
@@ -69,20 +53,26 @@ class Discussions extends React.Component {
     this.forceUpdate();
   }
 
-  createComment = (comment, id) => {
-    const newComments = this.state.questions[id].comments.slice();
+  handleCreateComment = (comment, id) => {
+    console.log(id)
+    const data = {
+      topicId: id+1,
+      text: comment.text
+    }
+
+    console.log(data)
+
+    client.createComment(data, id, (comment) => {
+      if (comment)
+        alert('Created!');
+    });  
+    
+    const newComments = this.state.questions[id].comments;
     newComments.push(comment);
 
-    const question = this.state.questions;
-    question[id].comments = newComments;
-
-    question[id].comments.map((item) =>{
-      console.log("comment.text = " + item.text + item.id);
-    })
-    this.state.questions[id].comments.map((item)=>{
-      console.log(item.text);
-    })
-    this.setState({questions:question});
+    const temp = this.state.questions;
+    temp[id].comments = newComments;
+    this.setState({questions: temp});
   };
 
   render() {
@@ -96,7 +86,7 @@ class Discussions extends React.Component {
             <div className="question-detail-container">
               <Question question={question}
                         lastIndex={question.comments.length}
-                        handleCreateComment={this.createComment}
+                        handleCreateComment={this.handleCreateComment}
                         username={this.props.username}/>
             </div>
           </div>

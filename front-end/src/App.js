@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
 
+import client from './client' 
+
 import Header from './components/Header.js'
 import Body from './components/Body.js'
 import SignIn from './pages/SignIn.js'
-
-import {Button} from 'semantic-ui-react'
-
-import { BrowserRouter as Hashrouter, Navlink, Route, Switch } from 'react-router-dom'
-
-
 
 class App extends React.Component {
 
@@ -17,43 +13,14 @@ class App extends React.Component {
     super (props);
 
     this.state = {
-      books: [
-            { id: 1,
-              name: "Harry Potter",
-              author: 'J.K Rowling',
-              genre: 'fantasy',
-              img: 'https://hpmedia.bloomsbury.com/rep/s/9781408855898_309038.jpeg'},
-            {
-              id: 2,
-              name: "Sherlock Holmes",
-              author: 'A.K. Doyle',
-              genre: 'detective',
-              img: 'https://images-na.ssl-images-amazon.com/images/I/51dffso4JfL._SX357_BO1,204,203,200_.jpg' },
-            {
-              id: 3,
-              name: "Abay",
-              author: 'Mukhtar Auezov',
-              genre: 'detective',
-              img: 'http://adebiportal.kz/images/w170-h220-cct-si/upload/iblock/3ae/3ae4a3897f409d28af79d414be178d53.jpg'},
-        ],
+      items: [],
 
       username: 'Miras',
       password: 'password',
 
-      carts: [
-            { id: 1,
-              name: "Harry Potter",
-              author: 'J.K Rowling',
-              genre: 'fantasy',
-              img: 'https://hpmedia.bloomsbury.com/rep/s/9781408855898_309038.jpeg'},],
-      feeds: [
-            {
-              id: 3,
-              name: "Abay",
-              author: 'Mukhtar Auezov',
-              genre: 'detective',
-              img: 'http://adebiportal.kz/images/w170-h220-cct-si/upload/iblock/3ae/3ae4a3897f409d28af79d414be178d53.jpg'}],
-      nextID: 2,
+      carts: [],
+      feeds: [],
+      nextID: 0,
       nextIDBooks: 4,
     }
 
@@ -62,6 +29,16 @@ class App extends React.Component {
 
     console.log (this.state.username);
     console.log (this.state.password);
+  }
+
+  componentDidMount() {
+    client.getBooks((books) => {
+      this.setState({
+        items: books
+      });
+      console.log(this.stateitems)
+      this.setState({nextID: this.state.items.length+1})
+    });
   }
 
   handleCartItemAdded = (cart) => {
@@ -81,16 +58,27 @@ class App extends React.Component {
   }
 
   handleBookItemAdded = (book) => {
+    const data = {
+      'id': this.state.nextID++,
+      'name': book.name,
+      'author': book.author,
+      'genre': book.genre,
+      'img': book.img,
+      'published_at': new Date().toISOString()
+    }
+    
+    let temp = this.state.items;
+    temp.push(data)
 
-    console.log("asdsad");
+    let temp2 = this.state.feeds;
+    temp2.push(data)
 
-    let items = this.state.books;
-    items.push ({id: this.state.nextIDBooks++, name: book.name, author: book.author, genre: book.genre});
-    this.setState ({books: items});
-
-    items = this.state.feeds;
-    items.push ({id: this.state.nextIDBooks++, name: book.name, author: book.author, genre: book.genre });
-    this.setState ({feed: items});
+    this.setState({items: temp, feeds: temp2});
+    
+    client.createBook(data, (book) => {
+      if (book)
+        alert('Created!');
+    });  
   }
 
   handleChangeUsername (text) {
@@ -119,7 +107,7 @@ class App extends React.Component {
                   onChangeUsername={this.handleChangeUsername}
                   onChangePassword={this.handleChangePassword}
                   carts={this.state.carts}
-                  books={this.state.books}
+                  books={this.state.items}
                   feeds={this.state.feeds}
                   username={this.state.username}
                   password={this.state.password}

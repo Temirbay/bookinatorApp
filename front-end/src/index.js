@@ -5,7 +5,6 @@ import './index.css';
 import 'semantic-ui-css/semantic.min.css';
 
 
-import SignIn from './pages/SignIn.js'
 import { BrowserRouter as Hashrouter} from 'react-router-dom'
 
 
