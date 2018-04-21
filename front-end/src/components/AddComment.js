@@ -30,7 +30,7 @@ class AddComment extends React.Component{
     }
 
     handlePostComment = (comment, id) =>{
-        comment.author = this.state.author;
+        comment.username = this.state.author;
         this.props.postComment(comment, id - 1)
         ReactDOM.findDOMNode(this.refs.form).value = "";
     }
