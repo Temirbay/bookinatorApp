@@ -57,22 +57,6 @@ class Book extends React.Component {
                 <h5>{this.props.book.genre}</h5>
                 <Rating icon='star' defaultRating={3} maxRating={4} />
                 <Button positive onClick={this.handleClick}> Want to Read</Button>
-                <Modal
-                  open={this.state.modalOpen}
-                  onClose={this.handleClose}
-                  basic
-                  size='small'
-                  className="modal"
-                >
-                <Modal.Content>
-                  <h3>Added to your book list</h3>
-                </Modal.Content>
-                <Modal.Actions>
-                  <Button color='green' onClick={this.handleClose} inverted>
-                    <Icon name='checkmark' /> Got it
-                  </Button>
-                </Modal.Actions>
-              </Modal>
               </div>
           </div>
         );
