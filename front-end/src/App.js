@@ -14,41 +14,118 @@ class App extends React.Component {
 
     this.state = {
       items: [],
-
-      username: 'Miras',
-      password: 'password',
+      users: [],
+      userId: 0,
+      username: "",
+      password: "",
 
       carts: [],
       feeds: [],
       nextID: 0,
-      nextIDBooks: 4,
+      nextIDBooks: 0,
     }
 
     this.state.username = this.props.username;
     this.state.password = this.props.password;
 
-    console.log (this.state.username);
-    console.log (this.state.password);
   }
 
   componentDidMount() {
-    client.getBooks((books) => {
-      this.setState({
-        items: books
-      });
+    client.getBooks((data) => {
+      this.setState({items: data});
       console.log(this.stateitems)
       this.setState({nextID: this.state.items.length+1})
+
+
+    console.log (this.state.username);
+    if (!this.state.username) return;
+
+    client.getUsers((data) => {
+      this.setState({users: data});
+
+      let hasUser = false;
+      this.state.users.map((user) => {
+        if (user.username == this.state.username){
+          this.setState({userId: user.id});
+          console.log (user)
+          hasUser = true;
+        }
+      })
+      
+      if (hasUser == false){
+          const data = {
+            "username": this.state.username,
+            "password": this.state.password,
+            "name": "",
+            "surname": ""
+          }
+
+          client.createUser(data, (user) => {
+              if (user) alert("Created!");
+              
+              let temp = this.state.users;
+              temp.push(data);
+              this.setState({
+                userId: this.state.users.length-1,
+                users: temp,
+              });
+
+              console.log(this.state.userId);
+            });  
+      }
+
+      console.log(this.state.username);  
+      console.log(this.state.userId);
+
+      client.getMyBooks(this.state.userId, (data) => {
+          let temp = this.state.carts;
+          console.log (data)
+          console.log (temp.length)
+          data.map ((item) => {
+            this.state.items.map((book) => {
+              if (book.id == item.book_id)
+                  temp.push(book)
+            });
+          });
+        //  this.setState({carts: temp});
+      });
     });
+    });
+
+
   }
 
   handleCartItemAdded = (cart) => {
     let items = this.state.carts;
-    let array = this.state.carts.filter((cur, index) => cur.name.toLowerCase() == cart.name.toLowerCase());
+    let array = this.state.carts.filter((cur, index) => 
+      cur.name.toLowerCase() == cart.name.toLowerCase());
+
     if (array.length == 0) {
-      cart.id = this.state.nextID++;
-      items.push (cart);
+
+      let book_id = 0;
+      this.state.items.map((book) => {
+          if (book.name == cart.name) {
+            book_id = book.id
+          }
+      })
+      
+      const data = {
+        "user_id": this.state.userId,
+        "book_id": book_id
+      }
+
+      console.log (data);
+
+      client.createTuple(this.state.userId, data, (tuple) => {
+        if (tuple) alert("Added!");
+    
+        let carts = this.state.carts;
+        cart.id = this.state.nextIDBooks++;
+        items.push (cart);
+        this.setState ({carts: items});
+      });  
+
     }
-    this.setState ({carts: items});
   }
 
   handleCartItemDeleted = (id) => {
@@ -67,17 +144,17 @@ class App extends React.Component {
       'published_at': new Date().toISOString()
     }
     
-    let temp = this.state.items;
-    temp.push(data)
-
-    let temp2 = this.state.feeds;
-    temp2.push(data)
-
-    this.setState({items: temp, feeds: temp2});
     
     client.createBook(data, (book) => {
       if (book)
         alert('Created!');
+        let temp = this.state.items;
+        temp.push(data)
+
+        let temp2 = this.state.feeds;
+        temp2.push(data)
+
+        this.setState({items: temp, feeds: temp2});
     });  
   }
 

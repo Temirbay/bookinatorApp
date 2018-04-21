@@ -3,8 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.parsers import JSONParser
 
-from api.models import Book, Topic, Comment
-from api.serializers import BookSerializer, TopicSerializer, CommentSerializer
+from api.models import Book, Topic, Comment, User
+from api.serializers import BookSerializer, TopicSerializer, CommentSerializer, UserSerializer, TupleSerializer
 
 @csrf_exempt
 def catalog(request):
@@ -20,6 +20,25 @@ def catalog(request):
             ser.save()
             return JsonResponse(ser.data, status=201)
     return JsonResponse(ser.errors, status=400)
+
+
+@csrf_exempt
+def mybook_list(request, user_id):
+  if request.method == "GET":
+    user = User.objects.get(pk=user_id)
+    books = user.books.all()
+    ser = TupleSerializer(books, many=True)
+    return JsonResponse(ser.data, safe=False)
+
+  elif request.method == "POST":
+    data = JSONParser().parse(request)
+    ser = TupleSerializer(data=data)
+    if ser.is_valid():
+      ser.save()
+      return JsonResponse(ser.data, status=201)
+  
+  return JsonResponse(ser.errors, status=400)
+
 
 @csrf_exempt
 def topic_list(request):
@@ -47,10 +66,39 @@ def topic_details(request, topic_id):
     return JsonResponse(ser.data, safe=False)
 
   elif request.method == "POST":
-    print("asdsaadasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd")
     data = JSONParser().parse(request)
     ser = CommentSerializer(data=data)
     if ser.is_valid():
       ser.save()
       return JsonResponse(ser.data, status=201)
   return JsonResponse(ser.errors, status=400)
+
+
+
+@csrf_exempt
+def user_list(request):
+  if request.method == "GET":
+    users = User.objects.all()
+    ser = UserSerializer(users, many=True)
+    return JsonResponse(ser.data, safe=False)
+
+  elif request.method == "POST":
+    data = JSONParser().parse(request)
+    ser = UserSerializer(data=data)
+    if ser.is_valid():
+      ser.save()
+      return JsonResponse(ser.data, status=201)
+      
+  return JsonResponse(ser.errors, status=400)
+
+@csrf_exempt
+def tuple_list(request):
+  if request.method == "POST":
+    data = JSONParser().parse(request)
+    ser = TupleSerializer(data=data)
+    if ser.is_valid():
+      ser.save()
+      return JsonResponse(ser.data, status=201)
+      
+  return JsonResponse(ser.errors, status=400)
+

@@ -57,15 +57,13 @@ class Discussions extends React.Component {
     console.log(id)
     const data = {
       topicId: id+1,
+      username: this.props.username,
       text: comment.text
     }
 
     console.log(data)
 
-    client.createComment(data, id, (comment) => {
-      if (comment)
-        alert('Created!');
-    });  
+    client.createComment(data, id, (comment) => {});  
     
     const newComments = this.state.questions[id].comments;
     newComments.push(comment);

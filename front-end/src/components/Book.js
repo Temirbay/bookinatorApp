@@ -11,7 +11,6 @@ class Book extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log (this.props.book.img);
 
     this.state = { modalOpen: false }
   }

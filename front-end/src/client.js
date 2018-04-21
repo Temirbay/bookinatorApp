@@ -37,6 +37,38 @@ module.exports = {
       .then(response => response.json())
       .then(success)
   },
+
+  getUsers(success){
+    fetch(`${BASE_URL}/users/`)
+      .then(response => response.json())
+      .then(success)
+  },
+
+  createUser(data, success){
+    fetch(`${BASE_URL}/users/`, {
+      'method': 'POST',
+      'body': JSON.stringify(data) 
+    })
+      .then(response => response.json())
+      .then(success)
+  },
+
+  getMyBooks(id, success){
+    fetch(`${BASE_URL}/users/${id}/books/`)
+      .then(response => response.json())
+      .then(success)
+  },
+
+  createTuple(id, data, success){
+    fetch(`${BASE_URL}/users/${id}/books/`, {
+      'method': 'POST',
+      'body': JSON.stringify(data) 
+    })
+      .then(response => response.json())
+      .then(success)
+  },
+  
+
 /*
   deleteTodo(id, success){
     fetch(`${BASE_URL}/todos/${id}/`, {

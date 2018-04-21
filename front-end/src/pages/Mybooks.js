@@ -10,6 +10,10 @@ class Mybooks extends React.Component {
     super (props);
   }
 
+  componentDidMount() {
+    console.log (this.props.carts)
+  }
+
   handleCartItemDeleted = (id) => {
     this.props.onCartItemDeleted(id);
   }
