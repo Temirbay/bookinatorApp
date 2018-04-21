@@ -25,6 +25,9 @@ class Tuple (models.Model):
     user_id = models.ForeignKey(User, related_name="books", on_delete=models.CASCADE)
     book_id = models.ForeignKey(Book, related_name="users", on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.book_id)
+
 
 class Topic(models.Model):
     text = models.CharField(max_length=200)

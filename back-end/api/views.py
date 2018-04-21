@@ -102,3 +102,27 @@ def tuple_list(request):
       
   return JsonResponse(ser.errors, status=400)
 
+
+@csrf_exempt
+def tuple_delete(request, user_id, book_id):
+  if request.method == "DELETE":
+    user = User.objects.get(pk=user_id)
+
+    obj = None 
+    books = user.books.all()
+    for book in books:
+      print (book)
+      print (book.book_id.id)
+      
+      print (book_id)
+      if (book.book_id.id == book_id):
+        obj = book
+
+    print (books)
+    print (obj)
+
+    ser = TupleSerializer (obj)
+    obj.delete();
+    return JsonResponse(ser.data)
+    
+  return JsonResponse(ser.errors, status=400)

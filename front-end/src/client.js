@@ -68,6 +68,13 @@ module.exports = {
       .then(success)
   },
   
+  deleteTuple (user_id, book_id, success) {
+    fetch(`${BASE_URL}/users/${user_id}/books/${book_id}/`, {
+      'method': 'DELETE'
+    })
+      .then(response => response.json())
+      .then(success)
+  }
 
 /*
   deleteTodo(id, success){

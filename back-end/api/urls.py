@@ -11,5 +11,5 @@ urlpatterns = [
     path ('tuples/', views.tuple_list, name="tuple_list"),
     
     path ('users/<int:user_id>/books/', views.mybook_list, name="mybook_list"),
-
+    path ('users/<int:user_id>/books/<int:book_id>/', views.tuple_delete, name="tuple_delete"),
 ]

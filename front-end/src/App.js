@@ -21,8 +21,8 @@ class App extends React.Component {
 
       carts: [],
       feeds: [],
-      nextID: 0,
-      nextIDBooks: 0,
+      nextID: 1,
+      nextIDBooks: 1,
     }
 
     this.state.username = this.props.username;
@@ -87,7 +87,7 @@ class App extends React.Component {
                   temp.push(book)
             });
           });
-        //  this.setState({carts: temp});
+          this.setState({carts: temp, nextIDBooks: temp.length-1});
       });
     });
     });
@@ -96,13 +96,13 @@ class App extends React.Component {
   }
 
   handleCartItemAdded = (cart) => {
-    let items = this.state.carts;
+    let temp = this.state.carts;
     let array = this.state.carts.filter((cur, index) => 
       cur.name.toLowerCase() == cart.name.toLowerCase());
 
     if (array.length == 0) {
 
-      let book_id = 0;
+      let book_id = 1;
       this.state.items.map((book) => {
           if (book.name == cart.name) {
             book_id = book.id
@@ -113,6 +113,8 @@ class App extends React.Component {
         "user_id": this.state.userId,
         "book_id": book_id
       }
+      
+      
 
       console.log (data);
 
@@ -120,18 +122,47 @@ class App extends React.Component {
         if (tuple) alert("Added!");
     
         let carts = this.state.carts;
-        cart.id = this.state.nextIDBooks++;
-        items.push (cart);
-        this.setState ({carts: items});
+        cart.id = this.state.carts.length+1;
+        temp.push (cart);
+        this.setState ({carts: temp});
       });  
 
     }
   }
 
   handleCartItemDeleted = (id) => {
-    this.setState({
-        carts: this.state.carts.filter((cart, index) => cart.id !== id)
-      });
+    console.log (id)
+    console.log (this.state.carts);
+
+    let curCart = this.state.carts[0];
+    this.state.carts.map ((cart) => {
+        if (cart.id == id)
+          curCart = cart;
+    });
+
+    let curBook;
+    let temp3 = this.state.items;
+
+    temp3.map((book) => {
+      if (book.name == curCart.name) {
+          curBook = book;
+      }
+    });
+
+    console.log (this.state.items)
+    console.log (curCart);
+    console.log (curBook);
+
+    client.deleteTuple(this.state.userId, curBook.id, (tuple) => {
+      if (tuple)
+        alert("Deleted!");
+        let temp = this.state.carts.filter((cart, index) => cart.id !== id)
+        this.setState({
+          carts: temp
+        });
+        
+    });
+
   }
 
   handleBookItemAdded = (book) => {
