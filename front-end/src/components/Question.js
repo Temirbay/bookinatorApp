@@ -19,7 +19,7 @@ class Question extends React.Component{
         const questionComments = this.props.question.comments.map((comment, index) =>{
             return(
                 <div key={index}>
-                    <h1 className="comment-by-user-name">{comment.author}</h1>
+                    <h1 className="comment-by-user-name">{comment.username}</h1>
                     <p className="comment">{comment.text}</p>
                 </div>
             );

@@ -10,8 +10,8 @@ class EditableProfile extends React.Component {
 
     this.state = {
       isFormOpen: false,
-      name: 'Miras',
-      surname: 'Temirbay',
+      name: this.props.name,
+      surname: this.props.surname,
       username: this.props.username,
       password: this.props.password,
     }
@@ -32,6 +32,7 @@ class EditableProfile extends React.Component {
     if (this.state.username != this.props.username)
       this.props.onChangeUsername (user.username);
 
+      this.props.onChangeUser(user);
   }
 
   handleChangeToForm = () => {
@@ -57,8 +58,8 @@ class EditableProfile extends React.Component {
         <div className="editable-profile">
           <ProfileForm
             onFormSubmit={this.handleFormSubmit}
-            name={this.state.name}
-            surname={this.state.surname}
+            name={this.props.name}
+            surname={this.props.surname}
             username={this.props.username}
             password={this.props.password}/>
         </div>

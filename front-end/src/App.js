@@ -18,6 +18,8 @@ class App extends React.Component {
       userId: 0,
       username: "",
       password: "",
+      name: "",
+      surname: "",
 
       carts: [],
       feeds: [],
@@ -46,7 +48,11 @@ class App extends React.Component {
       let hasUser = false;
       this.state.users.map((user) => {
         if (user.username == this.state.username){
-          this.setState({userId: user.id});
+          this.setState({
+            userId: user.id,
+            name: user.name,
+            surname: user.surname
+          });
           console.log (user)
           hasUser = true;
         }
@@ -56,8 +62,8 @@ class App extends React.Component {
           const data = {
             "username": this.state.username,
             "password": this.state.password,
-            "name": "",
-            "surname": ""
+            "name": this.state.name,
+            "surname": this.state.surname,
           }
 
           client.createUser(data, (user) => {
@@ -197,6 +203,14 @@ class App extends React.Component {
     this.setState ({password: text});
   }
 
+  handleChangeUser = (user) => {
+    console.log (user)
+    client.updateUser(this.state.userId, user, (item) => {
+      if (item)
+        alert("Updated!");
+    });  
+  }
+
   render() {
     if (!this.state.username || !this.state.password) {
       return (
@@ -214,11 +228,14 @@ class App extends React.Component {
                   onCartItemDeleted={this.handleCartItemDeleted}
                   onChangeUsername={this.handleChangeUsername}
                   onChangePassword={this.handleChangePassword}
+                  onChangeUser={this.handleChangeUser}
                   carts={this.state.carts}
                   books={this.state.items}
                   feeds={this.state.feeds}
                   username={this.state.username}
                   password={this.state.password}
+                  name={this.state.name}
+                  surname={this.state.surname}
                 /> </div>
       </div>
     );

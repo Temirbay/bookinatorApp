@@ -92,6 +92,17 @@ def user_list(request):
   return JsonResponse(ser.errors, status=400)
 
 @csrf_exempt
+def user_update(request, user_id):
+  user = User.objects.get(pk=user_id)
+  if request.method == "PUT":
+      data = JSONParser().parse(request)
+      ser = UserSerializer(user, data)
+      if ser.is_valid():
+          ser.save()
+          return JsonResponse(ser.data)
+  return JsonResponse(ser.errors, status=400)
+
+@csrf_exempt
 def tuple_list(request):
   if request.method == "POST":
     data = JSONParser().parse(request)

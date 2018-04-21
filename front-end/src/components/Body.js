@@ -40,6 +40,10 @@ class Body extends React.Component {
     this.props.onBookItemAdded(book);
   }
 
+  handleChangeUser = (user) => {
+    this.props.onChangeUser(user);
+  }
+
   render() {
 
       return(
@@ -76,6 +80,9 @@ class Body extends React.Component {
               <EditableProfile
                 username={this.props.username}
                 password={this.props.password}
+                name={this.props.name}
+                surname={this.props.surname}
+                onChangeUser={this.handleChangeUser}
                 onChangeUsername={this.handleChangeUsername}
                 onChangePassword={this.handleChangePassword}/>}/>
 

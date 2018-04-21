@@ -8,6 +8,7 @@ urlpatterns = [
     
     path ('catalog/', views.catalog, name="catalog"),
     path ('users/', views.user_list, name="user_list"),
+    path ('users/<int:user_id>', views.user_update, name="user_update"),
     path ('tuples/', views.tuple_list, name="tuple_list"),
     
     path ('users/<int:user_id>/books/', views.mybook_list, name="mybook_list"),

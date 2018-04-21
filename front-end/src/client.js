@@ -74,6 +74,15 @@ module.exports = {
     })
       .then(response => response.json())
       .then(success)
+  },
+
+  updateUser(user_id, data, success) {
+    fetch(`${BASE_URL}/users/${user_id}`, {
+      'method': 'PUT',
+      'body': JSON.stringify(data) 
+    })
+      .then(response => response.json())
+      .then(success)
   }
 
 /*
